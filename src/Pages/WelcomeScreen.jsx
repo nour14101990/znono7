@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, Github, Globe, User } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import AnimatedBackground from '../components/AnimatedBackground';
 
 const TypewriterEffect = ({ text }) => {
   const [displayText, setDisplayText] = useState('');

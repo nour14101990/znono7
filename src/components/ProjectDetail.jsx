@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from "react";
+import  { useEffect, useState, memo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, ExternalLink, Github, Code2, Star,

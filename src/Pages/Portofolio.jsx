@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
+import SwipeableViews from "react-swipeable-views-react-18-fix";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
@@ -11,8 +11,6 @@ import CardProject from "../components/CardProject";
 import TechStackIcon from "../components/TechStackIcon";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Certificate from "../components/Certificate";
-import { Code, Award, Boxes, Sparkles } from "lucide-react";
 
 // Separate ShowMore/ShowLess button component
 const ToggleButton = ({ onClick, isShowingMore }) => (

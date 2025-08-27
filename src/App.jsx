@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import "./index.css";
 import WelcomeScreen from "./Pages/WelcomeScreen";
 import Portfolio from "./Pages/Portofolio";
