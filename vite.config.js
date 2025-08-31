@@ -6,8 +6,13 @@ export default defineConfig({
     react(),
    
   ],
+
   base: process.env.VITE_BASE_PATH ||  './',
   build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+      include: [/node_modules/]
+    },
      // Output directory
     outDir: 'dist',
     // Generate sourcemaps for debugging (optional)

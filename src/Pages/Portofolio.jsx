@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views-react-18-fix";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
@@ -9,8 +8,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CardProject from "../components/CardProject";
 import TechStackIcon from "../components/TechStackIcon";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles, Boxes, Code } from "lucide-react";
 
 // Separate ShowMore/ShowLess button component
 const ToggleButton = ({ onClick, isShowingMore }) => (
@@ -61,40 +60,9 @@ const ToggleButton = ({ onClick, isShowingMore }) => (
         <polyline points={isShowingMore ? "18 15 12 9 6 15" : "6 9 12 15 18 9"}></polyline>
       </svg>
     </span>
-    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-400/50 transition-all duration-300 group-hover:w-full"></span>
+    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-400/50 transition-all duration-300 group-hover:w-full"></span>
   </button>
 );
-
-function TabPanel({ children, value, index, ...other }) {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: { xs: 1, sm: 3 } }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
 
 const techStacks = [
   { icon: "Microsoft_.NET.svg.png", language: ".NET" },
@@ -112,13 +80,6 @@ export default function FullWidthTabs() {
   const [showAllCertificates, setShowAllCertificates] = useState(false);
   const isMobile = window.innerWidth < 768;
   const initialItems = isMobile ? 4 : 6;
-
-  useEffect(() => {
-    // Initialize AOS once
-    AOS.init({
-      once: false,
-    });
-  }, []);
 
   const fetchData = useCallback(async () => {
     try {
@@ -163,32 +124,30 @@ export default function FullWidthTabs() {
   const displayedCertificates = showAllCertificates ? certificates : certificates.slice(0, initialItems);
 
   return (
-    <div className="md:px-[10%] px-[5%] w-full sm:mt-0 mt-[3rem] bg-transparent overflow-hidden" id="Portofolio">
-      {/* Header section - updated for dark mode */}
-      <div className="text-center pb-10" data-aos="fade-up" data-aos-duration="1000">
+    <div className="md:px-[10%] px-[5%] w-full sm:mt-0 mt-[3rem] bg-transparent overflow-hidden" id="Portfolio">
+      {/* Header section - updated to purple-indigo */}
+      <div className="text-center pb-10">
         <div className="inline-block relative group">
-         <h2
-            className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-indigo-500"
+          <h2
+            className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300"
           >
             Portfolio Showcase
           </h2>
         </div>
       
-        {/* Description */}
+        {/* Description - updated colors */}
         <p
           className="mt-2 text-slate-300 max-w-2xl mx-auto text-base sm:text-lg flex items-center justify-center gap-2"
-          data-aos="zoom-in-up"
-          data-aos-duration="800"
         >
-          <Sparkles className="w-5 h-5 text-green-400" />
+          <Sparkles className="w-5 h-5 text-purple-400" />
           Explore my journey through projects, certifications, and technical expertise.
           Each section represents a milestone in my continuous learning path.
-          <Sparkles className="w-5 h-5 text-green-400" />
+          <Sparkles className="w-5 h-5 text-purple-400" />
         </p>
       </div>
       
       <Box sx={{ width: "100%" }}>
-        {/* AppBar and Tabs section - updated for dark mode */}
+        {/* AppBar and Tabs section - updated to purple-indigo theme */}
         <AppBar
           position="static"
           elevation={0}
@@ -205,7 +164,7 @@ export default function FullWidthTabs() {
               left: 0,
               right: 0,
               bottom: 0,
-              background: "linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%)",
+              background: "linear-gradient(180deg, rgba(129, 140, 248, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%)",
               backdropFilter: "blur(10px)",
               zIndex: 0,
             },
@@ -231,19 +190,19 @@ export default function FullWidthTabs() {
                 margin: "8px",
                 borderRadius: "12px",
                 "&:hover": {
-                  color: "#bbf7d0",
-                  backgroundColor: "rgba(16, 185, 129, 0.1)",
+                  color: "#c7d2fe",
+                  backgroundColor: "rgba(99, 102, 241, 0.1)",
                   transform: "translateY(-2px)",
                   "& .lucide": {
                     transform: "scale(1.1) rotate(5deg)",
                   },
                 },
                 "&.Mui-selected": {
-                  color: "#22c55e",
-                  background: "linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1))",
-                  boxShadow: "0 4px 15px -3px rgba(16, 185, 129, 0.3)",
+                  color: "#6366f1",
+                  background: "linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(79, 70, 229, 0.1))",
+                  boxShadow: "0 4px 15px -3px rgba(99, 102, 241, 0.3)",
                   "& .lucide": {
-                    color: "#4ade80",
+                    color: "#818cf8",
                   },
                 },
               },
@@ -258,47 +217,54 @@ export default function FullWidthTabs() {
             <Tab
               icon={<Code className="mb-2 w-5 h-5 transition-all duration-300" />}
               label="Projects"
-              {...a11yProps(0)}
             />
-            {/*<Tab
-              icon={<Award className="mb-2 w-5 h-5 transition-all duration-300" />}
-              label="Certificates"
-              {...a11yProps(1)}
-            />*/}           
-             <Tab
+            <Tab
               icon={<Boxes className="mb-2 w-5 h-5 transition-all duration-300" />}
               label="Tech Stack"
-              {...a11yProps(2)}
             />
           </Tabs>
         </AppBar>
 
-        <SwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={value}
-          onChangeIndex={setValue}
-        >
-          <TabPanel value={value} index={0} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
-                {displayedProjects.map((project, index) => (
-                  <div
-                    key={project.id || index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <CardProject
-                      Img={project.Img}
-                      Title={project.Title}
-                      Description={project.Description}
-                      Link={project.Link}
-                      id={project.id}
-                    />
+        {/* Replaced SwipeableViews with AnimatePresence for smooth transitions */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={value}
+            initial={{ opacity: 0, x: value > previousValue ? 50 : -50 }} // Slide from right if next, left if prev
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: value > previousValue ? -50 : 50 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            <Box sx={{ p: { xs: 1, sm: 3 } }}>
+              {value === 0 ? (
+                <div className="container mx-auto flex justify-center items-center overflow-hidden">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
+                    {displayedProjects.map((project, index) => (
+                      <div key={project.id || index}>
+                        <CardProject
+                          Img={project.Img}
+                          Title={project.Title}
+                          Description={project.Description}
+                          Link={project.Link}
+                          id={project.id}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-            {projects.length > initialItems && (
+                </div>
+              ) : (
+                <div className="container mx-auto flex justify-center items-center overflow-hidden pb-[5%]">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 lg:gap-8 gap-5">
+                    {techStacks.map((stack, index) => (
+                      <div key={index}>
+                        <TechStackIcon TechStackIcon={stack.icon} Language={stack.language} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </Box>
+
+            {value === 0 && projects.length > initialItems && (
               <div className="mt-6 w-full flex justify-start">
                 <ToggleButton
                   onClick={() => toggleShowMore('projects')}
@@ -306,48 +272,8 @@ export default function FullWidthTabs() {
                 />
               </div>
             )}
-          </TabPanel>
-
-         {/* <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5 gap-4">
-                {displayedCertificates.map((certificate, index) => (
-                  <div
-                    key={index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <Certificate ImgSertif={certificate.Img} />
-                  </div>
-                ))}
-              </div>
-            </div>
-            {certificates.length > initialItems && (
-              <div className="mt-6 w-full flex justify-start">
-                <ToggleButton
-                  onClick={() => toggleShowMore('certificates')}
-                  isShowingMore={showAllCertificates}
-                />
-              </div>
-            )}
-          </TabPanel>*/}
-
-          <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden pb-[5%]">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 lg:gap-8 gap-5">
-                {techStacks.map((stack, index) => (
-                  <div
-                    key={index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <TechStackIcon TechStackIcon={stack.icon} Language={stack.language} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </TabPanel>
-        </SwipeableViews>
+          </motion.div>
+        </AnimatePresence>
       </Box>
     </div>
   );
